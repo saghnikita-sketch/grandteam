@@ -6,7 +6,8 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
 const $ = (id) => document.getElementById(id);
 let authMode = "login";
 let currentUser = null;
-const syntheticEmail = (username) => username.trim().toLowerCase() + "@accounts.grandteam.invalid";
+// Supabase Auth requires a syntactically valid email. This project-specific address is internal only; contact email stays optional in profile metadata.
+const syntheticEmail = (username) => username.trim().toLowerCase() + "@accounts.ytebcoaglmssphbeykhl.supabase.co";
 
 function toast(message) {
   const el = $("toast"); el.textContent = message; el.classList.add("show");
