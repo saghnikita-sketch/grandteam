@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090c">
+  <meta name="description" content="Grand Team — маркетплейс игровых товаров, услуг и объявлений.">
+  <title>Grand Team — Маркетплейс</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./"><span class="brand-mark">G</span><span>GRAND <b>TEAM</b></span></a>
+    <nav class="nav"><a class="active" href="#catalog">Маркетплейс</a><a href="#how">Как это работает</a></nav>
+    <div class="top-actions"><button class="btn btn-quiet" id="loginOpen">Войти</button><button class="btn btn-primary" id="registerOpen">Создать аккаунт</button><button class="avatar hidden" id="profileButton" aria-label="Профиль">U</button></div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> ЕДИНАЯ ПЛОЩАДКА ДЛЯ СДЕЛОК</div>
+        <h1>ТВОЯ КОМАНДА.<br><span>ТВОИ ПРАВИЛА.</span></h1>
+        <p>Покупай, продавай и находи нужное в одном месте. Добро пожаловать в Grand Team.</p>
+        <div class="hero-actions"><a class="btn btn-primary btn-large" href="#catalog">Открыть маркетплейс <span>↗</span></a><button class="btn btn-outline btn-large" id="heroRegister">Присоединиться</button></div>
+        <div class="hero-note"><span class="mini-dot"></span> Простая регистрация · Удобный каталог · Поддержка сообщества</div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-g">G</div><div class="floating-card card-top"><span class="tiny-label">GRAND TEAM</span><strong>MARKETPLACE</strong><small>Территория возможностей</small></div><div class="floating-card card-bottom"><span class="online-dot"></span> Платформа развивается</div></div>
+    </section>
+
+    <section class="stats-strip"><div><strong>01</strong><span>Единый каталог</span></div><div><strong>02</strong><span>Личный кабинет</span></div><div><strong>03</strong><span>Модерация объявлений</span></div><div><strong>04</strong><span>Система ролей</span></div></section>
+
+    <section class="section" id="catalog">
+      <div class="section-heading"><div><div class="eyebrow">ПОИСК ВОЗМОЖНОСТЕЙ</div><h2>Маркетплейс</h2><p>Свежие предложения от участников сообщества</p></div><button class="btn btn-primary" id="createListing">＋ Разместить объявление</button></div>
+      <div class="catalog-tools"><label class="search"><span>⌕</span><input id="searchInput" placeholder="Поиск объявлений..." autocomplete="off"></label><select id="categoryFilter"><option value="">Все категории</option><option>Транспорт</option><option>Недвижимость</option><option>Аккаунты</option><option>Игровые предметы</option><option>Услуги</option><option>Другое</option></select></div>
+      <div class="listing-grid" id="listingGrid"><div class="empty-state"><div class="loader"></div><p>Загружаем объявления...</p></div></div>
+    </section>
+
+    <section class="how section" id="how"><div class="eyebrow">НАЧАТЬ ПРОСТО</div><h2>Три шага до своей сделки</h2><div class="steps"><article><span>01</span><h3>Создай аккаунт</h3><p>Выбери имя пользователя и пароль. Почту можно добавить по желанию.</p></article><article><span>02</span><h3>Найди предложение</h3><p>Используй категории и поиск, чтобы быстро найти нужное.</p></article><article><span>03</span><h3>Размести объявление</h3><p>Добавь своё предложение. После проверки модерацией оно появится в каталоге.</p></article></div></section>
+  </main>
+
+  <footer><a class="brand" href="./"><span class="brand-mark">G</span><span>GRAND <b>TEAM</b></span></a><span>© <span id="year"></span> Grand Team Marketplace</span><span class="footer-status"><i></i> Онлайн-платформа</span></footer>
+
+  <div class="modal hidden" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle"><div class="modal-panel"><button class="modal-close" data-close aria-label="Закрыть">×</button><div class="eyebrow">GRAND TEAM ACCOUNT</div><h2 id="authTitle">Добро пожаловать</h2><p class="modal-sub" id="authSubtitle">Войди или создай аккаунт, чтобы продолжить.</p><div class="auth-tabs"><button class="selected" id="tabLogin">Вход</button><button id="tabRegister">Регистрация</button></div><form id="authForm"><label>Имя пользователя<input id="authUsername" required minlength="3" maxlength="24" pattern="[A-Za-z0-9_]+" placeholder="Например, Player_01" autocomplete="username"></label><label id="emailWrap" class="hidden">Почта <span class="optional">(необязательно)</span><input id="authEmail" type="email" placeholder="name@example.com" autocomplete="email"></label><label>Пароль<input id="authPassword" type="password" required minlength="8" placeholder="Не менее 8 символов" autocomplete="current-password"></label><button class="btn btn-primary btn-wide" id="authSubmit" type="submit">Войти</button><div class="form-message" id="authMessage" role="status"></div></form><p class="fine-print">Продолжая, ты соглашаешься с правилами использования Grand Team.</p></div></div>
+
+  <div class="modal hidden" id="listingModal" role="dialog" aria-modal="true" aria-labelledby="listingTitle"><div class="modal-panel"><button class="modal-close" data-close aria-label="Закрыть">×</button><div class="eyebrow">НОВОЕ ПРЕДЛОЖЕНИЕ</div><h2 id="listingTitle">Разместить объявление</h2><p class="modal-sub">Объявление поступит на проверку модерации.</p><form id="listingForm"><label>Название<input id="listingName" required maxlength="90" placeholder="Что предлагаешь?"></label><label>Категория<select id="listingCategory" required><option value="">Выбери категорию</option><option>Транспорт</option><option>Недвижимость</option><option>Аккаунты</option><option>Игровые предметы</option><option>Услуги</option><option>Другое</option></select></label><label>Описание<textarea id="listingDescription" rows="4" maxlength="2000" placeholder="Подробности предложения..."></textarea></label><label>Цена<input id="listingPrice" type="number" min="0" step="0.01" value="0" required></label><button class="btn btn-primary btn-wide" type="submit">Отправить на модерацию</button><div class="form-message" id="listingMessage" role="status"></div></form></div></div>
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>
